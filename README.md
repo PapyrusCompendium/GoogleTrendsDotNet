@@ -1,6 +1,11 @@
-<center>
-<img src="https://raw.githubusercontent.com/PapyrusCompendium/GoogleTrendsDotNet/master/GoogleTrendsDotNet/images/GoogleTrendsDotNet.png">
-</center>
+<p align="center">
+	<img src="https://raw.githubusercontent.com/PapyrusCompendium/GoogleTrendsDotNet/master/GoogleTrendsDotNet/images/GoogleTrendsDotNet.png"/>
+	<h3 align="center">GoogleTrends Api In .NET Core</h3>
+</p>
+
+[![Pipeline](https://github.com/PapyrusCompendium/GoogleTrendsDotNet/actions/workflows/main.yml/badge.svg?branch=master&event=status)](https://github.com/PapyrusCompendium/GoogleTrendsDotNet/actions/workflows/main.yml)
+![Nuget](https://img.shields.io/nuget/v/GoogleTrendsDotNet)
+![Nuget](https://img.shields.io/nuget/dt/GoogleTrendsDotNet)
 
 # GoogleTrendsDotNet
 
