@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GoogleTrends\GoogleTrends.csproj" />
+    <ProjectReference Include="..\GoogleTrends\GoogleTrendsDotNet.csproj" />
   </ItemGroup>
 
 </Project>
