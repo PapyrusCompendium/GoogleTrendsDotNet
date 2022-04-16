@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
+using GoogleTrends.Models.GeoData;
 using GoogleTrends.Models.Widgets;
 
 using Newtonsoft.Json;
@@ -11,6 +13,8 @@ namespace GoogleTrends.Models.Explore {
         private const string RELATED_TOPICS_ID = "RELATED_TOPICS";
         private const string GEO_MAP = "GEO_MAP";
         private const string TIME_SERIES = "TIMESERIES";
+
+        public IGoogleTrendsClient GoogleTrendsClient { get; set; }
 
         [JsonProperty("widgets")]
         public List<Widget> Widgets { get; set; }
@@ -43,6 +47,26 @@ namespace GoogleTrends.Models.Explore {
                 default:
                     return default;
             }
+        }
+
+        public async Task<TimelineData[]> GetTimeLineData() {
+            var timelineWidget = GetWidgetType(WidgetType.TimelineTrend);
+            return await GoogleTrendsClient.Widgets.GetTimelineWidget(timelineWidget);
+        }
+
+        public async Task<GeoMapData[]> GetGeoMapData() {
+            var geoWidget = GetWidgetType(WidgetType.GeoTrend);
+            return await GoogleTrendsClient.Widgets.GetGeoDataWidget(geoWidget);
+        }
+
+        public async Task<RankedList[]> GetRelatedQueries() {
+            var geoWidget = GetWidgetType(WidgetType.RelatedQueries);
+            return await GoogleTrendsClient.Widgets.GetRelatedQueriesWidget(geoWidget);
+        }
+
+        public async Task<RankedList[]> GetRelatedTopics() {
+            var geoWidget = GetWidgetType(WidgetType.RelatedTopics);
+            return await GoogleTrendsClient.Widgets.GetRelatedQueriesWidget(geoWidget);
         }
     }
 }

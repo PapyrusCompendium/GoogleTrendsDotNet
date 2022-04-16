@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 
 using GoogleTrends.Extensions;
@@ -7,7 +6,7 @@ using GoogleTrends.Models;
 using GoogleTrends.Models.GeoData;
 
 namespace GoogleTrends.GoogleTrendsApi {
-    public class GeoApi : ApiService {
+    public class GeoApi : ApiService, IGeoApi {
         private const string GEO_SETTINGS = "api/explore/pickers/geo";
 
         public GeoApi(GoogleTrendsClient googleTrendsClient) : base(googleTrendsClient) {

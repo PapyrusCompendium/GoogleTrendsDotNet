@@ -3,12 +3,11 @@ using System.Threading.Tasks;
 
 using GoogleTrends.Extensions;
 using GoogleTrends.Models;
-using GoogleTrends.Models.Explore;
 using GoogleTrends.Models.GeoData;
 using GoogleTrends.Models.Widgets;
 
 namespace GoogleTrends.GoogleTrendsApi {
-    public class WidgetApi : ApiService {
+    public class WidgetApi : ApiService, IWidgetApi {
         private const string RELATED_SEARCHES_WIDGET = "api/widgetdata/relatedsearches";
         private const string GEO_DATA_WIDGET = "api/widgetdata/comparedgeo";
         private const string TIMELINE_WIDGET = "api/widgetdata/multiline";

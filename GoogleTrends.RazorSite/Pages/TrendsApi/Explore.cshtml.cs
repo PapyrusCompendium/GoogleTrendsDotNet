@@ -1,5 +1,3 @@
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 using GoogleTrends.Models.Explore;
@@ -27,19 +25,13 @@ namespace GoogleTrends.RazorSite.Pages.TrendsApi {
         }
 
         public async Task<IActionResult> OnPostAsync() {
-            ExploreResponse = await _googleTrendsClient.Explore.ExploreQuery(SearchQuery, SearchType.WebSearch, untilTime: QueryTimes.Day, geo: RegionIds.Canada);
+            ExploreResponse = await _googleTrendsClient.Explore.ExploreQuery(SearchQuery, SearchType.WebSearch,
+                queryTime: QueryTimes.PastDay, geo: RegionIds.Canada);
 
-            var relatedQueriesWidget = ExploreResponse.GetWidgetType(WidgetType.RelatedQueries);
-            RelatedQueries = await _googleTrendsClient.Widgets.GetRelatedQueriesWidget(relatedQueriesWidget);
-
-            var relatedTopicsWidget = ExploreResponse.GetWidgetType(WidgetType.RelatedTopics);
-            RelatedTopics = await _googleTrendsClient.Widgets.GetRelatedQueriesWidget(relatedTopicsWidget);
-
-            var geoWidget = ExploreResponse.GetWidgetType(WidgetType.GeoTrend);
-            GeoMapData = await _googleTrendsClient.Widgets.GetGeoDataWidget(geoWidget);
-
-            var timelineWidget = ExploreResponse.GetWidgetType(WidgetType.TimelineTrend);
-            TimeLineData = await _googleTrendsClient.Widgets.GetTimelineWidget(timelineWidget);
+            RelatedQueries = await ExploreResponse.GetRelatedQueries();
+            RelatedTopics = await ExploreResponse.GetRelatedTopics();
+            GeoMapData = await ExploreResponse.GetGeoMapData();
+            TimeLineData = await ExploreResponse.GetTimeLineData();
 
             return Page();
         }

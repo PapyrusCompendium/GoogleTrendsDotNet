@@ -7,23 +7,23 @@ using GoogleTrends.Models.Explore;
 using GoogleTrends.Models.Explore.Request;
 
 namespace GoogleTrends.GoogleTrendsApi {
-    public class ExploreApi : ApiService {
+    public class ExploreApi : ApiService, IExploreApi {
         private const string EXPLORE = "api/explore";
 
         public ExploreApi(GoogleTrendsClient googleTrendsClient) : base(googleTrendsClient) {
         }
 
-        public async Task<ExploreResponse> ExploreQuery(string query, string seartchType = default, string region = default,
-            string fromTime = "now", string untilTime = "1-H", string geo = default) {
+        public async Task<ExploreResponse> ExploreQuery(string query, string searchType = default,
+            string region = default, string queryTime = "now 4-H", string geo = default) {
             return await ExploreQuery(new ExploreQueryParameters {
                 Region = string.IsNullOrWhiteSpace(region) ? Regions.UnitedStates : region,
                 Request = new() {
                     Category = 0,
-                    SearchType = string.IsNullOrWhiteSpace(seartchType) ? SearchType.WebSearch : seartchType,
+                    SearchType = string.IsNullOrWhiteSpace(searchType) ? SearchType.WebSearch : searchType,
                     ComparisonItem = new() {
                         new() {
                             Geo = geo,
-                            Time = $"{fromTime} {untilTime}",
+                            Time = queryTime,
                             Keyword = query
                         }
                     }
@@ -38,7 +38,9 @@ namespace GoogleTrends.GoogleTrendsApi {
             var relatedQueryRequest = new HttpRequestMessage(HttpMethod.Get, uriString);
 
             var response = await _googleTrendsClient._httpClient.SendAsync(relatedQueryRequest);
-            return response.As<ExploreResponse>();
+            var exploreResponse = response.As<ExploreResponse>();
+            exploreResponse.GoogleTrendsClient = _googleTrendsClient;
+            return exploreResponse;
         }
     }
 }

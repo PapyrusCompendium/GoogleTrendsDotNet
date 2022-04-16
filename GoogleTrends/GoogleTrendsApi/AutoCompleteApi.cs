@@ -6,7 +6,7 @@ using GoogleTrends.Models;
 using GoogleTrends.Models.AutoComplete;
 
 namespace GoogleTrends.GoogleTrendsApi {
-    public class AutoCompleteApi : ApiService {
+    public class AutoCompleteApi : ApiService, IAutoCompleteApi {
         private const string AUTO_COMPLETE = "api/autocomplete";
 
         public AutoCompleteApi(GoogleTrendsClient googleTrendsClient) : base(googleTrendsClient) {
