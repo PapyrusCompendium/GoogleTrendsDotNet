@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleTrends", "GoogleTrends\GoogleTrends.csproj", "{1FF37290-1A9B-4DDD-A5DB-E84B4407F8AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleTrends.Tests", "GoogleTrends.Tests\GoogleTrends.Tests.csproj", "{B22738AE-FEFA-4954-832F-C8C3CC011C62}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1FF37290-1A9B-4DDD-A5DB-E84B4407F8AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FF37290-1A9B-4DDD-A5DB-E84B4407F8AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FF37290-1A9B-4DDD-A5DB-E84B4407F8AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FF37290-1A9B-4DDD-A5DB-E84B4407F8AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B22738AE-FEFA-4954-832F-C8C3CC011C62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B22738AE-FEFA-4954-832F-C8C3CC011C62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B22738AE-FEFA-4954-832F-C8C3CC011C62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B22738AE-FEFA-4954-832F-C8C3CC011C62}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5CE5EB36-C837-4A2D-8B63-3467718E45E1}
+	EndGlobalSection
+EndGlobal
