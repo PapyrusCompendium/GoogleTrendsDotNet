@@ -1,9 +1,8 @@
 ﻿using GoogleTrends.Models.GeoData;
-using GoogleTrends.Models.Widgets;
 
 using Newtonsoft.Json;
 
-namespace GoogleTrends.Models.Request {
+namespace GoogleTrends.Models.Widgets {
     public class Restriction {
         [JsonProperty("geo")]
         public GeoCountry Geo { get; set; }

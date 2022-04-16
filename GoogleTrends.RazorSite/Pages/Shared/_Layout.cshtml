@@ -29,8 +29,8 @@
                     </ul>
                     @if (!ViewContext.View.Path.Contains("index", StringComparison.OrdinalIgnoreCase))
                     {
-                        <form asp-antiforgery="true" class="d-flex" action="/TrendsApi/Explore" method="post">
-                            <input type="text" class="form-control" name="SearchQuery" placeholder="Google Trend Query">
+                        <form asp-antiforgery="true" class="d-flex" action="/TrendsApi/Explore" method="post" id="searchForm">
+                            <input type="text" class="form-control" name="searchQuery" id="trendQuery" placeholder="Google Trend Query">
                             <button class="btn btn-outline-primary" type="submit">Search</button>
                         </form>
                     }
@@ -55,6 +55,44 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <input type="hidden" class="form-control" name="searchQuery" id="fauxText">
+    <script>
+        $(document).ready(function () {
+            $("#trendQuery").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: '/api/AutoCompleteQuery',
+                        headers: {
+                            "RequestVerificationToken":
+                                $('input[name="__RequestVerificationToken"]').val()
+                        },
+                        data: { "searchQuery": request.term },
+                        dataType: "json",
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return item;
+                            }))
+                        },
+                        failure: function (response) {
+                            alert("failure " + response.responseText);
+                        }
+                    });
+                },
+                select: function (event, ui) {
+                    event.preventDefault();
+
+                    const regexp = /^(\(\)|\(.+?\)) (.+)$/g;
+                    const regexMatches = [...ui.item.value.matchAll(regexp)][0];
+                    console.log(regexMatches[2]);
+                    $("#trendQuery").val(regexMatches[2]);
+                    $("#searchForm").submit();
+                },
+                minLength: 1,
+                delay: 0
+            });
+        });
+    </script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

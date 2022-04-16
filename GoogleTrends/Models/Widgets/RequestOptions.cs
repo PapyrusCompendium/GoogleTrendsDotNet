@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace GoogleTrends.Models {
+namespace GoogleTrends.Models.Widgets {
     public class RequestOptions {
         [JsonProperty("property")]
         public string Property { get; set; }

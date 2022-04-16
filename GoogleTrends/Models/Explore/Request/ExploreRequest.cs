@@ -11,7 +11,7 @@ namespace GoogleTrends.Models.Explore.Request {
         public int Category { get; set; }
 
         [JsonProperty("property")]
-        public string Property { get; set; }
+        public string SearchType { get; set; }
 
         public override string ToString() {
             return JsonConvert.SerializeObject(this);

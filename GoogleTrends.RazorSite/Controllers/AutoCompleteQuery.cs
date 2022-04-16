@@ -17,7 +17,7 @@ namespace GoogleTrends.RazorSite.Controllers {
         [HttpGet]
         public async Task<IActionResult> GetRecommendedQueries(string searchQuery) {
             var autoCompleteResults = await _googleTrendsClient.AutoComplete.GetAutoCompleteSuggestions(searchQuery);
-            return Ok(autoCompleteResults.AutoCompleteSuggestions.Select(i => i.Title));
+            return Ok(autoCompleteResults.Select(i => $"({i.Type}) {i.Title}"));
         }
     }
 }

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 
-using GoogleTrends.Models.Widgets;
+using GoogleTrends.Models.Explore;
 
 using Newtonsoft.Json;
 
-namespace GoogleTrends.Models.Explore {
+namespace GoogleTrends.Models.Widgets {
     public class Widget {
         [JsonProperty("request")]
         public WidgetRequest Request { get; set; }

@@ -13,12 +13,12 @@ namespace GoogleTrends.GoogleTrendsApi {
         public ExploreApi(GoogleTrendsClient googleTrendsClient) : base(googleTrendsClient) {
         }
 
-        public async Task<ExploreResponse> ExploreQuery(string query) {
+        public async Task<ExploreResponse> ExploreQuery(string query, string seartchType = default, string region = default) {
             return await ExploreQuery(new ExploreQueryParameters {
-                Region = Regions.UnitedStates,
+                Region = string.IsNullOrWhiteSpace(region) ? Regions.UnitedStates : region,
                 Request = new() {
                     Category = 0,
-                    Property = string.Empty,
+                    SearchType = string.IsNullOrWhiteSpace(seartchType) ? SearchType.WebSearch : seartchType,
                     ComparisonItem = new() {
                         new() {
                             Geo = string.Empty,

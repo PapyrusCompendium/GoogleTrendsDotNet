@@ -12,13 +12,13 @@ namespace GoogleTrends.GoogleTrendsApi {
         public AutoCompleteApi(GoogleTrendsClient googleTrendsClient) : base(googleTrendsClient) {
         }
 
-        public async Task<AutoCompleteResponse> GetAutoCompleteSuggestions(string searchQuery) {
+        public async Task<AutoCompleteSuggestion[]> GetAutoCompleteSuggestions(string searchQuery) {
             return await GetAutoCompleteSuggestions(new ApiParameter() {
                 Region = Regions.UnitedStates
             }, searchQuery);
         }
 
-        public async Task<AutoCompleteResponse> GetAutoCompleteSuggestions(ApiParameter apiParameter, string query) {
+        public async Task<AutoCompleteSuggestion[]> GetAutoCompleteSuggestions(ApiParameter apiParameter, string query) {
             var parameters = AddDefaultParameters(apiParameter);
 
             var uriString = $"{AUTO_COMPLETE}/{query}?{parameters}";
@@ -26,7 +26,7 @@ namespace GoogleTrends.GoogleTrendsApi {
 
             var response = await _googleTrendsClient._httpClient.SendAsync(relatedQueryRequest);
 
-            return response.As<AutoCompleteResponse>("$.default");
+            return response.As<AutoCompleteSuggestion[]>("$.default.topics");
         }
     }
 }

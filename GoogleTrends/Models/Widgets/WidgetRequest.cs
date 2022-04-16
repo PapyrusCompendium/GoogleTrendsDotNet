@@ -2,7 +2,6 @@
 
 using GoogleTrends.Models.Explore;
 using GoogleTrends.Models.GeoData;
-using GoogleTrends.Models.Request;
 
 using Newtonsoft.Json;
 

@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Threading.Tasks;
 
 using GoogleTrends.Models.Explore;
@@ -10,20 +9,14 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace GoogleTrends.RazorSite.Pages.TrendsApi {
     public class ExploreModel : PageModel {
-        private const string RELATED_QUERIES_ID = "RELATED_QUERIES";
-        private const string RELATED_TOPICS_ID = "RELATED_TOPICS";
-        private const string TIME_SERIES = "TIMESERIES";
-        private const string GEO_MAP = "GEO_MAP";
-
         [BindProperty]
         public string SearchQuery { get; set; }
 
         public ExploreResponse ExploreResponse { get; set; }
-        public RankedList[] RelatedQueriesResponse { get; set; }
-        public RankedList[] RelatedTopicsResponse { get; set; }
+        public RankedList[] RelatedQueries { get; set; }
+        public RankedList[] RelatedTopics { get; set; }
         public GeoMapData[] GeoMapData { get; set; }
         public TimelineData[] TimeLineData { get; set; }
-
 
         private readonly IGoogleTrendsClient _googleTrendsClient;
 
@@ -32,19 +25,20 @@ namespace GoogleTrends.RazorSite.Pages.TrendsApi {
         }
 
         public async Task<IActionResult> OnPostAsync() {
-            ExploreResponse = await _googleTrendsClient.Explore.ExploreQuery(SearchQuery);
+            ExploreResponse = await _googleTrendsClient.Explore.ExploreQuery(SearchQuery, SearchType.WebSearch);
 
-            var relatedQueriesWidget = ExploreResponse.Widgets.FirstOrDefault(i => i.Id == RELATED_QUERIES_ID);
-            RelatedQueriesResponse = await _googleTrendsClient.Widgets.GetRelatedQueriesWidget(relatedQueriesWidget);
+            var relatedQueriesWidget = ExploreResponse.GetWidgetType(WidgetType.RelatedQueries);
+            RelatedQueries = await _googleTrendsClient.Widgets.GetRelatedQueriesWidget(relatedQueriesWidget);
 
-            var relatedTopicsWidget = ExploreResponse.Widgets.FirstOrDefault(i => i.Id == RELATED_TOPICS_ID);
-            RelatedTopicsResponse = await _googleTrendsClient.Widgets.GetRelatedQueriesWidget(relatedTopicsWidget);
+            var relatedTopicsWidget = ExploreResponse.GetWidgetType(WidgetType.RelatedTopics);
+            RelatedTopics = await _googleTrendsClient.Widgets.GetRelatedQueriesWidget(relatedTopicsWidget);
 
-            var geoWidget = ExploreResponse.Widgets.FirstOrDefault(i => i.Id == GEO_MAP);
+            var geoWidget = ExploreResponse.GetWidgetType(WidgetType.GeoTrend);
             GeoMapData = await _googleTrendsClient.Widgets.GetGeoDataWidget(geoWidget);
 
-            var timelineWidget = ExploreResponse.Widgets.FirstOrDefault(i => i.Id == TIME_SERIES);
+            var timelineWidget = ExploreResponse.GetWidgetType(WidgetType.TimelineTrend);
             TimeLineData = await _googleTrendsClient.Widgets.GetTimelineWidget(timelineWidget);
+
             return Page();
         }
     }

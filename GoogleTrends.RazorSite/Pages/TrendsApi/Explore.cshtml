@@ -19,7 +19,7 @@
     <h2 class="display-4">Related Queries</h2>
     <hr />
     <div class="w-100 h-75 overflow-scroll noBar">
-        @foreach (var relatedQuery in @Model.RelatedQueriesResponse.SelectMany(i => i.RankedKeywords))
+        @foreach (var relatedQuery in @Model.RelatedQueries.SelectMany(i => i.RankedKeywords))
         {
             <p><a href="@relatedQuery.Link">@relatedQuery.Query - @relatedQuery.FormattedValue</a></p>
             <hr />
@@ -31,7 +31,7 @@
     <h2 class="display-4">Related Topics</h2>
     <hr />
     <div class="w-100 h-75 overflow-scroll noBar">
-        @foreach (var relatedTopic in @Model.RelatedTopicsResponse.SelectMany(i => i.RankedKeywords))
+        @foreach (var relatedTopic in @Model.RelatedTopics.SelectMany(i => i.RankedKeywords))
         {
             <p><a href="@relatedTopic.Link">(@relatedTopic.Topic.Type) @relatedTopic.Topic.Title - @relatedTopic.FormattedValue</a></p>
             <hr />

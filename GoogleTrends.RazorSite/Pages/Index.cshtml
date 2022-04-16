@@ -10,40 +10,8 @@
 </div>
 
 <div class="position-absolute w-50 start-50 translate-middle" style="top: 20%">
-    <form asp-antiforgery="true" class="row g-3" action="/TrendsApi/Explore" method="post">
+    <form asp-antiforgery="true" class="row g-3" action="/TrendsApi/Explore" method="post" id="searchForm">
         <input type="text" class="form-control" id="trendQuery" name="SearchQuery" placeholder="Google Trend Query">
         <button type="submit" class="btn btn-primary mb-3">Search</button>
     </form>
 </div>
-
-@section scripts{
-    <script>
-        $(document).ready(function () {
-            $("#trendQuery").autocomplete({
-                source: function (request, response) {
-                    $.ajax({
-                        url: '/api/AutoCompleteQuery',
-                        headers: {
-                            "RequestVerificationToken":
-                                $('input[name="__RequestVerificationToken"]').val()
-                        },
-                        data: { "searchQuery": request.term },
-                        dataType: "json",
-                        success: function (data) {
-                            response($.map(data, function (item) {
-                                return item;
-                            }))
-                        },
-                        failure: function (response) {
-                            alert("failure " + response.responseText);
-                        }
-                    });
-                },
-                select: function (e, i) {
-                    $("#trendQuery").text(i.item.value);
-                },
-                minLength: 3
-            });
-        });
-    </script>
-}

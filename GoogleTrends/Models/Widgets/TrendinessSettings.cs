@@ -1,7 +1,7 @@
 ﻿
 using Newtonsoft.Json;
 
-namespace GoogleTrends.Models.Request {
+namespace GoogleTrends.Models.Widgets {
     public class TrendinessSettings {
         [JsonProperty("compareTime")]
         public string CompareTime { get; set; }
