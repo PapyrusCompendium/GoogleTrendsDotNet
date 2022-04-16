@@ -1,3 +1,5 @@
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 using GoogleTrends.Models.Explore;
@@ -25,7 +27,7 @@ namespace GoogleTrends.RazorSite.Pages.TrendsApi {
         }
 
         public async Task<IActionResult> OnPostAsync() {
-            ExploreResponse = await _googleTrendsClient.Explore.ExploreQuery(SearchQuery, SearchType.WebSearch);
+            ExploreResponse = await _googleTrendsClient.Explore.ExploreQuery(SearchQuery, SearchType.WebSearch, untilTime: QueryTimes.Day, geo: RegionIds.Canada);
 
             var relatedQueriesWidget = ExploreResponse.GetWidgetType(WidgetType.RelatedQueries);
             RelatedQueries = await _googleTrendsClient.Widgets.GetRelatedQueriesWidget(relatedQueriesWidget);

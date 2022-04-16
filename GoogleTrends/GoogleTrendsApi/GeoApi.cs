@@ -13,17 +13,18 @@ namespace GoogleTrends.GoogleTrendsApi {
         public GeoApi(GoogleTrendsClient googleTrendsClient) : base(googleTrendsClient) {
         }
 
+        public async Task<GeoLocation> GetAllGeoLocations() {
+            return await GetAllGeoLocations(new ApiParameter {
+                Region = Regions.UnitedStates
+            });
+        }
+
         public async Task<GeoLocation> GetAllGeoLocations(ApiParameter apiParameter) {
             var parameters = AddDefaultParameters(apiParameter);
-
-            var requestUri = new UriBuilder(GEO_SETTINGS) {
-                Query = parameters.ToString()
-            };
-
-            var relatedQueryRequest = new HttpRequestMessage(HttpMethod.Get, requestUri.Uri);
+            var uriString = $"{GEO_SETTINGS}?{parameters}";
+            var relatedQueryRequest = new HttpRequestMessage(HttpMethod.Get, uriString);
 
             var response = await _googleTrendsClient._httpClient.SendAsync(relatedQueryRequest);
-
             return response.As<GeoLocation>();
         }
     }

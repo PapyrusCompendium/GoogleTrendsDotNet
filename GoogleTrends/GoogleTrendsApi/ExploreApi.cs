@@ -13,7 +13,8 @@ namespace GoogleTrends.GoogleTrendsApi {
         public ExploreApi(GoogleTrendsClient googleTrendsClient) : base(googleTrendsClient) {
         }
 
-        public async Task<ExploreResponse> ExploreQuery(string query, string seartchType = default, string region = default) {
+        public async Task<ExploreResponse> ExploreQuery(string query, string seartchType = default, string region = default,
+            string fromTime = "now", string untilTime = "1-H", string geo = default) {
             return await ExploreQuery(new ExploreQueryParameters {
                 Region = string.IsNullOrWhiteSpace(region) ? Regions.UnitedStates : region,
                 Request = new() {
@@ -21,8 +22,8 @@ namespace GoogleTrends.GoogleTrendsApi {
                     SearchType = string.IsNullOrWhiteSpace(seartchType) ? SearchType.WebSearch : seartchType,
                     ComparisonItem = new() {
                         new() {
-                            Geo = string.Empty,
-                            Time = "today 12-m",
+                            Geo = geo,
+                            Time = $"{fromTime} {untilTime}",
                             Keyword = query
                         }
                     }
