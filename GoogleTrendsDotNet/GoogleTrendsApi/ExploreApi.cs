@@ -14,15 +14,15 @@ namespace GoogleTrends.GoogleTrendsApi {
         }
 
         public async Task<ExploreResponse> ExploreQuery(string query, string searchType = default,
-            string region = default, string queryTime = "now 4-H", string geo = default) {
+            string userRegion = default, string queryTime = "now 4-H", string geoSearch = default) {
             return await ExploreQuery(new ExploreQueryParameters {
-                Region = string.IsNullOrWhiteSpace(region) ? Regions.UnitedStates : region,
+                Region = string.IsNullOrWhiteSpace(userRegion) ? Regions.UnitedStates : userRegion,
                 Request = new() {
                     Category = 0,
                     SearchType = string.IsNullOrWhiteSpace(searchType) ? SearchType.WebSearch : searchType,
                     ComparisonItem = new() {
                         new() {
-                            Geo = geo,
+                            Geo = geoSearch,
                             Time = queryTime,
                             Keyword = query
                         }

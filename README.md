@@ -3,7 +3,7 @@
 	<h3 align="center">GoogleTrends Api In .NET Core</h3>
 </p>
 
-[![Pipeline](https://github.com/PapyrusCompendium/GoogleTrendsDotNet/actions/workflows/main.yml/badge.svg?branch=master&event=status)](https://github.com/PapyrusCompendium/GoogleTrendsDotNet/actions/workflows/main.yml)
+![CI](https://github.com/PapyrusCompendium/GoogleTrendsDotNet/actions/workflows/main.yml/badge.svg)
 ![Nuget](https://img.shields.io/nuget/v/GoogleTrendsDotNet)
 ![Nuget](https://img.shields.io/nuget/dt/GoogleTrendsDotNet)
 
@@ -20,8 +20,8 @@ This api makes google trends incredibly easy to consume from C#.
     private static async Task QueryData() {
         var trendsClient = new GoogleTrendsClient();
 
-        var exploreData = await trendsClient.Explore.ExploreQuery("DotNet", SearchType.WebSearch,
-            Regions.UnitedStates, QueryTimes.PastMonth, RegionIds.UnitedStates);
+        var exploreData = await trendsClient.Explore.ExploreQuery(SearchQuery, SearchType.WebSearch,
+            queryTime: QueryTimes.PastYear, geoSearch: RegionIds.WorldWide);
 
         var relatedSearches = await exploreData.GetRelatedQueries();
         Console.WriteLine("Top 5 Related Searches:");
@@ -53,8 +53,8 @@ Service:
         }
 
         public void PrintTrendDetails(){
-            var exploreData = await _googleTrendsClient.Explore.ExploreQuery("DotNet", SearchType.WebSearch,
-            Regions.UnitedStates, QueryTimes.PastMonth, RegionIds.UnitedStates);
+            var exploreData = await trendsClient.Explore.ExploreQuery(SearchQuery, SearchType.WebSearch,
+                queryTime: QueryTimes.PastYear, geoSearch: RegionIds.WorldWide);
 
             var relatedSearches = await exploreData.GetRelatedQueries();
             Console.WriteLine("Top 5 Related Searches:");
