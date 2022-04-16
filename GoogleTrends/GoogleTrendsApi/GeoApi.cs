@@ -1,7 +1,5 @@
-﻿using System.Net.Http;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
-using GoogleTrends.Extensions;
 using GoogleTrends.Models;
 using GoogleTrends.Models.GeoData;
 
@@ -19,12 +17,7 @@ namespace GoogleTrends.GoogleTrendsApi {
         }
 
         public async Task<GeoLocation> GetAllGeoLocations(ApiParameter apiParameter) {
-            var parameters = AddDefaultParameters(apiParameter);
-            var uriString = $"{GEO_SETTINGS}?{parameters}";
-            var relatedQueryRequest = new HttpRequestMessage(HttpMethod.Get, uriString);
-
-            var response = await _googleTrendsClient._httpClient.SendAsync(relatedQueryRequest);
-            return response.As<GeoLocation>();
+            return await SendRequest<GeoLocation>(apiParameter, GEO_SETTINGS);
         }
     }
 }

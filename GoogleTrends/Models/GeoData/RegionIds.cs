@@ -1,5 +1,6 @@
 ﻿namespace GoogleTrends.Models.GeoData {
     public struct RegionIds {
+        public static readonly string WorldWide = string.Empty;
         public static readonly string Afghanistan = "AF";
         public static readonly string ÅlandIslands = "AX";
         public static readonly string Albania = "AL";

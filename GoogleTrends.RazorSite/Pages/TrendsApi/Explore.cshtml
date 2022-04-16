@@ -15,7 +15,11 @@
     }
 </style>
 
-<div class="position-fixed w-25 h-75 overflow-hidden" style="top: 10%; left: 5%">
+<canvas style="height:25%" id="timeChart"></canvas>
+
+<h3 class="display-6 position-fixed start-50 top-0 translate-middle-x">@Model.SearchQuery</h3>
+
+<div class="position-fixed w-25 h-75 overflow-hidden" style="top: 25%; left: 5%">
     <h2 class="display-4">Related Queries</h2>
     <hr />
     <div class="w-100 h-75 overflow-scroll noBar">
@@ -27,7 +31,7 @@
     </div>
 </div>
 
-<div class="position-fixed w-25 h-75 overflow-hidden" style="top: 10%; left: 35%">
+<div class="position-fixed w-25 h-75 overflow-hidden" style="top: 25%; left: 35%">
     <h2 class="display-4">Related Topics</h2>
     <hr />
     <div class="w-100 h-75 overflow-scroll noBar">
@@ -39,7 +43,7 @@
     </div>
 </div>
 
-<div class="position-fixed w-25 h-75 overflow-hidden" style="top: 10%; left: 65%">
+<div class="position-fixed w-25 h-75 overflow-hidden" style="top: 25%; left: 65%">
     <h2 class="display-4">Geographical Trends</h2>
     <hr />
     <div class="w-100 h-75 overflow-scroll noBar">
@@ -54,3 +58,48 @@
         }
     </div>
 </div>
+
+@section Scripts {
+    @{
+        var timelineInOrder = Model.TimeLineData.OrderBy(i => i.ManagedTime);
+        var jsLabels = string.Join(",", timelineInOrder.Select(i => $"'{i.ManagedTime:yy-MMM-dd hh-tt}'"));
+        var jsData = string.Join(",", timelineInOrder.Select(i => $"'{i.Value.FirstOrDefault()}'"));
+    }
+    <script>
+        var colors = ['#007bff', '#28a745', '#333333', '#c3e6cb', '#dc3545', '#6c757d'];
+
+        var timeChart = document.getElementById("timeChart");
+        var chartData = {
+            labels: [@Html.Raw(jsLabels)],
+            datasets: [{
+                data: [@Html.Raw(jsData)],
+                backgroundColor: 'transparent',
+                borderColor: '#176AC7',
+                borderWidth: 2,
+                pointBackgroundColor: '#6192C6'
+            }]
+        };
+
+        if (timeChart) {
+            new Chart(timeChart, {
+                type: 'line',
+                data: chartData,
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                                beginAtZero: false
+                            }
+                        }]
+                    },
+                    legend: {
+                        display: false
+                    },
+                    responsive: true
+                }
+            });
+        }
+
+    </script>
+}

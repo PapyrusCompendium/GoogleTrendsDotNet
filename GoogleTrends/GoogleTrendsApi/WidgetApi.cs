@@ -1,7 +1,5 @@
-﻿using System.Net.Http;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
-using GoogleTrends.Extensions;
 using GoogleTrends.Models;
 using GoogleTrends.Models.GeoData;
 using GoogleTrends.Models.Widgets;
@@ -20,7 +18,8 @@ namespace GoogleTrends.GoogleTrendsApi {
         }
 
         public async Task<RankedList[]> GetRelatedQueriesWidget(WidgetRequestParameter relatedQueryParameters) {
-            return await SendWidgetRequest<RankedList[]>(relatedQueryParameters, RELATED_SEARCHES_WIDGET, "$.default.rankedList");
+            return await SendRequest<RankedList[]>(relatedQueryParameters, RELATED_SEARCHES_WIDGET,
+                relatedQueryParameters.Query.ToString(), "$.default.rankedList");
         }
 
         public async Task<GeoMapData[]> GetGeoDataWidget(Widget widget) {
@@ -28,7 +27,8 @@ namespace GoogleTrends.GoogleTrendsApi {
         }
 
         public async Task<GeoMapData[]> GetGeoDataWidget(WidgetRequestParameter relatedQueryParameters) {
-            return await SendWidgetRequest<GeoMapData[]>(relatedQueryParameters, GEO_DATA_WIDGET, "$.default.geoMapData");
+            return await SendRequest<GeoMapData[]>(relatedQueryParameters, GEO_DATA_WIDGET,
+                relatedQueryParameters.Query.ToString(), "$.default.geoMapData");
         }
 
         public async Task<TimelineData[]> GetTimelineWidget(Widget widget) {
@@ -36,7 +36,8 @@ namespace GoogleTrends.GoogleTrendsApi {
         }
 
         public async Task<TimelineData[]> GetTimelineWidget(WidgetRequestParameter relatedQueryParameters) {
-            return await SendWidgetRequest<TimelineData[]>(relatedQueryParameters, TIMELINE_WIDGET, "$.default.timelineData");
+            return await SendRequest<TimelineData[]>(relatedQueryParameters, TIMELINE_WIDGET,
+                relatedQueryParameters.Query.ToString(), "$.default.timelineData");
         }
 
         private WidgetRequestParameter GenerateRequestParameter(Widget widget, string region = default) {
@@ -47,18 +48,6 @@ namespace GoogleTrends.GoogleTrendsApi {
                     : region,
                 Token = widget.Token
             };
-        }
-
-        private async Task<TType> SendWidgetRequest<TType>(WidgetRequestParameter relatedQueryParameters, string apiUri, string jsonPath = "$.default") {
-            var parameters = AddDefaultParameters(relatedQueryParameters);
-            parameters["req"] = relatedQueryParameters.Query.ToString();
-
-            var uriString = $"{apiUri}?{parameters}";
-            var relatedQueryRequest = new HttpRequestMessage(HttpMethod.Get, uriString);
-
-            var response = await _googleTrendsClient._httpClient.SendAsync(relatedQueryRequest);
-
-            return response.As<TType>(jsonPath);
         }
     }
 }

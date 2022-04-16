@@ -1,6 +1,9 @@
 ﻿using System.Collections.Specialized;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web;
 
+using GoogleTrends.Extensions;
 using GoogleTrends.Models;
 
 namespace GoogleTrends.GoogleTrendsApi {
@@ -21,6 +24,20 @@ namespace GoogleTrends.GoogleTrendsApi {
             }
 
             return parameters;
+        }
+
+        protected async Task<TType> SendRequest<TType>(ApiParameter relatedQueryParameters, string apiUri, string jsonRequest = default, string jsonPath = default) {
+            var parameters = AddDefaultParameters(relatedQueryParameters);
+            if (!string.IsNullOrWhiteSpace(jsonRequest)) {
+                parameters["req"] = jsonRequest;
+            }
+
+            var uriString = $"{apiUri}?{parameters}";
+            var relatedQueryRequest = new HttpRequestMessage(HttpMethod.Get, uriString);
+
+            var response = await _googleTrendsClient._httpClient.SendAsync(relatedQueryRequest);
+
+            return response.As<TType>(jsonPath);
         }
     }
 }

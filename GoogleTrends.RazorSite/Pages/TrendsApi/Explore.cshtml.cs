@@ -26,7 +26,7 @@ namespace GoogleTrends.RazorSite.Pages.TrendsApi {
 
         public async Task<IActionResult> OnPostAsync() {
             ExploreResponse = await _googleTrendsClient.Explore.ExploreQuery(SearchQuery, SearchType.WebSearch,
-                queryTime: QueryTimes.PastDay, geo: RegionIds.Canada);
+                queryTime: QueryTimes.PastYear, geo: RegionIds.WorldWide);
 
             RelatedQueries = await ExploreResponse.GetRelatedQueries();
             RelatedTopics = await ExploreResponse.GetRelatedTopics();

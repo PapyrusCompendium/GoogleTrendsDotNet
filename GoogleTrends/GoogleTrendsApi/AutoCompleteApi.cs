@@ -20,12 +20,10 @@ namespace GoogleTrends.GoogleTrendsApi {
 
         public async Task<AutoCompleteSuggestion[]> GetAutoCompleteSuggestions(ApiParameter apiParameter, string query) {
             var parameters = AddDefaultParameters(apiParameter);
-
             var uriString = $"{AUTO_COMPLETE}/{query}?{parameters}";
             var relatedQueryRequest = new HttpRequestMessage(HttpMethod.Get, uriString);
 
             var response = await _googleTrendsClient._httpClient.SendAsync(relatedQueryRequest);
-
             return response.As<AutoCompleteSuggestion[]>("$.default.topics");
         }
     }
