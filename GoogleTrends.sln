@@ -3,16 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoogleTrendsDotNet", "GoogleTrends\GoogleTrendsDotNet.csproj", "{1FF37290-1A9B-4DDD-A5DB-E84B4407F8AD}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoogleTrends.Tests", "GoogleTrends.Tests\GoogleTrends.Tests.csproj", "{B22738AE-FEFA-4954-832F-C8C3CC011C62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleTrends.RazorSite", "GoogleTrends.RazorSite\GoogleTrends.RazorSite.csproj", "{30E83DAA-FE73-4BF7-861F-DDD9522ABAF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoogleTrends.RazorSite", "GoogleTrends.RazorSite\GoogleTrends.RazorSite.csproj", "{30E83DAA-FE73-4BF7-861F-DDD9522ABAF6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0E9493D9-B40D-4034-BF4F-B18D189225DC}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoogleTrendsDotNet", "GoogleTrendsDotNet\GoogleTrendsDotNet.csproj", "{A68AB577-D5A9-424A-BF74-A61A70779857}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,10 +20,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1FF37290-1A9B-4DDD-A5DB-E84B4407F8AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1FF37290-1A9B-4DDD-A5DB-E84B4407F8AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1FF37290-1A9B-4DDD-A5DB-E84B4407F8AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1FF37290-1A9B-4DDD-A5DB-E84B4407F8AD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B22738AE-FEFA-4954-832F-C8C3CC011C62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B22738AE-FEFA-4954-832F-C8C3CC011C62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B22738AE-FEFA-4954-832F-C8C3CC011C62}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -32,6 +28,10 @@ Global
 		{30E83DAA-FE73-4BF7-861F-DDD9522ABAF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30E83DAA-FE73-4BF7-861F-DDD9522ABAF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30E83DAA-FE73-4BF7-861F-DDD9522ABAF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A68AB577-D5A9-424A-BF74-A61A70779857}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A68AB577-D5A9-424A-BF74-A61A70779857}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A68AB577-D5A9-424A-BF74-A61A70779857}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A68AB577-D5A9-424A-BF74-A61A70779857}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
