@@ -31,7 +31,7 @@ jobs:
         dotnet-version: 5.0.x
 
     - name: Build
-      run: dotnet build $SOLUTION --configuration $BUILD_CONFIG --no-restore /p:Version=1.0.CI-$(Build.BuildNumber)
+      run: dotnet build $SOLUTION --configuration $BUILD_CONFIG --no-restore /p:Version=1.0.$(Build.BuildNumber)
 
     - name: Publish
       if: startsWith(github.ref, 'refs/heads/master')
