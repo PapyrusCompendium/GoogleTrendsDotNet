@@ -3,10 +3,16 @@
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageIcon>images\GoogleTrendsDotNet.png</PackageIcon>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<None Include="..\GoogleTrendsDotNet.png" Pack="true" Visible="false" PackagePath="images\GoogleTrendsDotNet.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="images\" />
 	</ItemGroup>
 
 </Project>
