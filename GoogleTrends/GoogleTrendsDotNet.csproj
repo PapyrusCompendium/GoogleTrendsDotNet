@@ -8,7 +8,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-		<None Include="..\GoogleTrendsDotNet.png" Pack="true" Visible="false" PackagePath="images\GoogleTrendsDotNet.png" />
+		<None Include="..\images\GoogleTrendsDotNet.png" Pack="true" Visible="false" PackagePath="images\GoogleTrendsDotNet.png" />
 	</ItemGroup>
 
 	<ItemGroup>
