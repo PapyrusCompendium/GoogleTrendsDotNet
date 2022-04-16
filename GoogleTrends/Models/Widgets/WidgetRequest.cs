@@ -2,10 +2,11 @@
 
 using GoogleTrends.Models.Explore;
 using GoogleTrends.Models.GeoData;
+using GoogleTrends.Models.Request;
 
 using Newtonsoft.Json;
 
-namespace GoogleTrends.Models.Request {
+namespace GoogleTrends.Models.Widgets {
     public class WidgetRequest {
         [JsonProperty("time")]
         public string Time { get; set; }
@@ -42,5 +43,11 @@ namespace GoogleTrends.Models.Request {
 
         [JsonProperty("userCountryCode")]
         public string UserCountryCode { get; set; }
+
+        public override string ToString() {
+            return JsonConvert.SerializeObject(this, Formatting.None, new JsonSerializerSettings() {
+                NullValueHandling = NullValueHandling.Ignore
+            });
+        }
     }
 }

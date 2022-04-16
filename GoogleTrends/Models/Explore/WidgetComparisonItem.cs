@@ -1,6 +1,6 @@
 ﻿
 using GoogleTrends.Models.GeoData;
-using GoogleTrends.Models.RelatedQueries.Request;
+using GoogleTrends.Models.Widgets;
 
 using Newtonsoft.Json;
 

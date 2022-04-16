@@ -1,7 +1,7 @@
 ﻿
 using Newtonsoft.Json;
 
-namespace GoogleTrends.Models.RelatedQueries.Request {
+namespace GoogleTrends.Models.Widgets {
     public class Keyword {
         [JsonProperty("type")]
         public string Type { get; set; }

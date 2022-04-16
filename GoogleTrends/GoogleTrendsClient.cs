@@ -23,6 +23,7 @@ namespace GoogleTrends {
             RelatedQuries = new(this);
             GeoLocation = new(this);
             Explore = new(this);
+            AutoComplete = new(this);
         }
 
         public ExploreApi Explore { get; set; }

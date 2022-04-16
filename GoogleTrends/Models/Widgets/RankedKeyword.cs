@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
 
-namespace GoogleTrends.Models.RelatedQueries {
+namespace GoogleTrends.Models.Widgets {
     public class RankedKeyword {
+        private string _link;
+
         [JsonProperty("topic")]
         public Topic Topic { get; set; }
 
@@ -18,6 +20,13 @@ namespace GoogleTrends.Models.RelatedQueries {
         public bool HasData { get; set; }
 
         [JsonProperty("link")]
-        public string Link { get; set; }
+        public string Link {
+            get {
+                return $"https://trends.google.com{_link}";
+            }
+            set {
+                _link = value;
+            }
+        }
     }
 }

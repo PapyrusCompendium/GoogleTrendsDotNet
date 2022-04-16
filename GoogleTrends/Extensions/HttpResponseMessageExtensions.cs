@@ -1,16 +1,18 @@
 ﻿using System.IO;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 using Newtonsoft.Json.Linq;
 
 namespace GoogleTrends.Extensions {
     public static class HttpResponseMessageExtensions {
-        internal const string JSON_REPLACE_STRING = ")]}'\n";
+        private static readonly Regex _fixJsonRegex = new Regex("^.+{?");
         public static TType As<TType>(this HttpResponseMessage httpResponseMessage, string jsonPath = default) {
             if (httpResponseMessage.IsSuccessStatusCode) {
                 using var streamReader = new StreamReader(httpResponseMessage.Content.ReadAsStream());
-                var responseContent = streamReader.ReadToEnd().Replace(JSON_REPLACE_STRING, string.Empty);
+                var responseContent = streamReader.ReadToEnd();
+                responseContent = _fixJsonRegex.Replace(responseContent, string.Empty);
 
                 return SelectJPath<TType>(jsonPath, responseContent);
             }
@@ -20,7 +22,8 @@ namespace GoogleTrends.Extensions {
 
         public static async Task<TType> AsAsync<TType>(this HttpResponseMessage httpResponseMessage, string jsonPath = default) {
             if (httpResponseMessage.IsSuccessStatusCode) {
-                var responseContent = (await httpResponseMessage.Content.ReadAsStringAsync()).Replace(JSON_REPLACE_STRING, string.Empty);
+                var responseContent = (await httpResponseMessage.Content.ReadAsStringAsync());
+                responseContent = _fixJsonRegex.Replace(responseContent, string.Empty);
 
                 return SelectJPath<TType>(jsonPath, responseContent);
             }

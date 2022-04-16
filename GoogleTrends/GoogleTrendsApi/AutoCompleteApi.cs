@@ -26,7 +26,7 @@ namespace GoogleTrends.GoogleTrendsApi {
 
             var response = await _googleTrendsClient._httpClient.SendAsync(relatedQueryRequest);
 
-            return response.As<AutoCompleteResponse>("default");
+            return response.As<AutoCompleteResponse>("$.default");
         }
     }
 }

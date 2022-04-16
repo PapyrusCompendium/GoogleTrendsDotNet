@@ -2,7 +2,7 @@
 
 using Newtonsoft.Json;
 
-namespace GoogleTrends.Models.RelatedQueries {
+namespace GoogleTrends.Models.Widgets {
     public class RankedList {
         [JsonProperty("rankedKeyword")]
         public List<RankedKeyword> RankedKeywords { get; set; }

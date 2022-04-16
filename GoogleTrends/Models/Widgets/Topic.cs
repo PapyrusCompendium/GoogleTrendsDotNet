@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace GoogleTrends.Models.RelatedQueries {
+namespace GoogleTrends.Models.Widgets {
     public class Topic {
         [JsonProperty("mid")]
         public string Mid { get; set; }

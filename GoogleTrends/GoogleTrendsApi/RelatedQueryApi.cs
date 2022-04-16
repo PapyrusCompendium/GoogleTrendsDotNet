@@ -1,11 +1,9 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 
 using GoogleTrends.Extensions;
 using GoogleTrends.Models;
-using GoogleTrends.Models.RelatedQueries;
-using GoogleTrends.Models.RelatedQueries.Request;
+using GoogleTrends.Models.Widgets;
 
 namespace GoogleTrends.GoogleTrendsApi {
     public class RelatedQueryApi : ApiService {
@@ -14,14 +12,15 @@ namespace GoogleTrends.GoogleTrendsApi {
         public RelatedQueryApi(GoogleTrendsClient googleTrendsClient) : base(googleTrendsClient) {
         }
 
-        public async Task<RelatedQueriesResponse> FindRelatedQueries(RelatedQueryRequest query) {
-            return await FindRelatedQueries(new RelatedQueryParameters {
+        public async Task<RelatedWidgetResponse> FindRelatedQueries(WidgetRequest query, string token) {
+            return await FindRelatedQueries(new WidgetRequestParameter {
                 Query = query,
-                Region = Regions.UnitedStates
+                Region = Regions.UnitedStates,
+                Token = token
             });
         }
 
-        public async Task<RelatedQueriesResponse> FindRelatedQueries(RelatedQueryParameters relatedQueryParameters) {
+        public async Task<RelatedWidgetResponse> FindRelatedQueries(WidgetRequestParameter relatedQueryParameters) {
             var parameters = AddDefaultParameters(relatedQueryParameters);
             parameters["req"] = relatedQueryParameters.Query.ToString();
 
@@ -30,7 +29,7 @@ namespace GoogleTrends.GoogleTrendsApi {
 
             var response = await _googleTrendsClient._httpClient.SendAsync(relatedQueryRequest);
 
-            return response.As<RelatedQueriesResponse>("default");
+            return response.As<RelatedWidgetResponse>("$.default");
         }
     }
 }

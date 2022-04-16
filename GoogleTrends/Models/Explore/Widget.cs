@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-using GoogleTrends.Models.Request;
+using GoogleTrends.Models.Widgets;
 
 using Newtonsoft.Json;
 

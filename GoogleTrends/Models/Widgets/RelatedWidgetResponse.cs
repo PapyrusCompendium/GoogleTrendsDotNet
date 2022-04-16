@@ -2,8 +2,8 @@
 
 using Newtonsoft.Json;
 
-namespace GoogleTrends.Models.RelatedQueries {
-    public class RelatedQueriesResponse {
+namespace GoogleTrends.Models.Widgets {
+    public class RelatedWidgetResponse {
         [JsonProperty("rankedList")]
         public List<RankedList> RankedList { get; set; }
     }

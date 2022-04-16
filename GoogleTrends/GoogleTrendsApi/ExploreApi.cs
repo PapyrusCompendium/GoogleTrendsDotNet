@@ -37,7 +37,6 @@ namespace GoogleTrends.GoogleTrendsApi {
             var relatedQueryRequest = new HttpRequestMessage(HttpMethod.Get, uriString);
 
             var response = await _googleTrendsClient._httpClient.SendAsync(relatedQueryRequest);
-            System.Console.WriteLine($"RetryAfter: {response.Headers.RetryAfter}");
             return response.As<ExploreResponse>();
         }
     }
