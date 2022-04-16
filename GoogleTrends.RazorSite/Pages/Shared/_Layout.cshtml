@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    @Html.AntiForgeryToken()
 </head>
 <body>
     <header>
@@ -26,10 +27,18 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
                     </ul>
+                    @if (!ViewContext.View.Path.Contains("index", StringComparison.OrdinalIgnoreCase))
+                    {
+                        <form asp-antiforgery="true" class="d-flex" action="/TrendsApi/Explore" method="post">
+                            <input type="text" class="form-control" name="SearchQuery" placeholder="Google Trend Query">
+                            <button class="btn btn-outline-primary" type="submit">Search</button>
+                        </form>
+                    }
                 </div>
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()

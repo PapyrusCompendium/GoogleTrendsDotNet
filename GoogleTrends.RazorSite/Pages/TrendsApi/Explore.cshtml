@@ -1,6 +1,7 @@
 ﻿@page
 @model GoogleTrends.RazorSite.Pages.TrendsApi.ExploreModel
 @{
+    ViewData["Title"] = Model.SearchQuery;
 }
 
 <style>
@@ -18,7 +19,7 @@
     <h2 class="display-4">Related Queries</h2>
     <hr />
     <div class="w-100 h-75 overflow-scroll noBar">
-        @foreach (var relatedQuery in @Model.RelatedQueriesResponse.RankedList.SelectMany(i => i.RankedKeywords))
+        @foreach (var relatedQuery in @Model.RelatedQueriesResponse.SelectMany(i => i.RankedKeywords))
         {
             <p><a href="@relatedQuery.Link">@relatedQuery.Query - @relatedQuery.FormattedValue</a></p>
             <hr />
@@ -30,9 +31,25 @@
     <h2 class="display-4">Related Topics</h2>
     <hr />
     <div class="w-100 h-75 overflow-scroll noBar">
-        @foreach (var relatedTopic in @Model.RelatedTopicsResponse.RankedList.SelectMany(i => i.RankedKeywords))
+        @foreach (var relatedTopic in @Model.RelatedTopicsResponse.SelectMany(i => i.RankedKeywords))
         {
-            <p><a href="@relatedTopic.Link">(@relatedTopic.Topic.Type)@relatedTopic.Topic.Title - @relatedTopic.FormattedValue</a></p>
+            <p><a href="@relatedTopic.Link">(@relatedTopic.Topic.Type) @relatedTopic.Topic.Title - @relatedTopic.FormattedValue</a></p>
+            <hr />
+        }
+    </div>
+</div>
+
+<div class="position-fixed w-25 h-75 overflow-hidden" style="top: 10%; left: 65%">
+    <h2 class="display-4">Geographical Trends</h2>
+    <hr />
+    <div class="w-100 h-75 overflow-scroll noBar">
+        @foreach (var geoMap in @Model.GeoMapData.OrderByDescending(i => i.Value.FirstOrDefault()).Take(25))
+        {
+            if (geoMap.Value.FirstOrDefault() == 0)
+            {
+                continue;
+            }
+            <p>(@geoMap.GeoCode) @geoMap.GeoName - @geoMap.Value.FirstOrDefault()</p>
             <hr />
         }
     </div>

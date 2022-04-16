@@ -4,8 +4,6 @@
     ViewData["Title"] = "Home page";
 }
 
-@Html.AntiForgeryToken()
-
 <div class="text-center">
     <h1 class="display-4">Google Trends Api</h1>
     <p class="lead">Test website for GoogleTrendsDotNet Api.</p>
@@ -36,9 +34,6 @@
                                 return item;
                             }))
                         },
-                        error: function (xhr, textStatus, error) {
-                            alert(xhr.statusText);
-                        },
                         failure: function (response) {
                             alert("failure " + response.responseText);
                         }
@@ -50,7 +45,5 @@
                 minLength: 3
             });
         });
-
-
     </script>
 }

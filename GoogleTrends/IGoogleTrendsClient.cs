@@ -2,7 +2,7 @@
 
 namespace GoogleTrends {
     public interface IGoogleTrendsClient {
-        RelatedQueryApi RelatedQuries { get; set; }
+        WidgetApi Widgets { get; set; }
         GeoApi GeoLocation { get; set; }
         ExploreApi Explore { get; set; }
         AutoCompleteApi AutoComplete { get; set; }

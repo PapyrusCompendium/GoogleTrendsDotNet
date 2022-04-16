@@ -20,7 +20,7 @@ namespace GoogleTrends {
             _httpClient.DefaultRequestHeaders.UserAgent.Clear();
             _httpClient.DefaultRequestHeaders.UserAgent.ParseAdd($"Dotnet Trends Api Client/{Assembly.GetExecutingAssembly().ImageRuntimeVersion} ({SOURCE_CONTROL_LINK})");
 
-            RelatedQuries = new(this);
+            Widgets = new(this);
             GeoLocation = new(this);
             Explore = new(this);
             AutoComplete = new(this);
@@ -30,7 +30,7 @@ namespace GoogleTrends {
 
         public AutoCompleteApi AutoComplete { get; set; }
 
-        public RelatedQueryApi RelatedQuries { get; set; }
+        public WidgetApi Widgets { get; set; }
 
         public GeoApi GeoLocation { get; set; }
     }
