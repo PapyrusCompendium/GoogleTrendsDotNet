@@ -1,0 +1,14 @@
+﻿@page
+@model GoogleTrends.RazorSite.Pages.TrendsApi.ExploreModel
+@{
+}
+
+<div class="text-center">
+    <h1 class="display-4">
+        Explore Request: @Model.SearchQuery
+    </h1>
+    @foreach (var keyWord in @Model.ExploreResponse.Keywords)
+    {
+        <p class="lead">(@keyWord.Type) @keyWord.Value</p>
+    }
+</div>

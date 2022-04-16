@@ -1,0 +1,19 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@Html.AntiForgeryToken()
+
+<div class="text-center">
+    <h1 class="display-4">Google Trends Api</h1>
+    <p class="lead">Test website for GoogleTrendsDotNet Api.</p>
+</div>
+
+<div class="position-absolute w-50 start-50 translate-middle" style="top: 20%">
+    <form asp-antiforgery="true" class="row g-3" action="/TrendsApi/Explore" method="post">
+        <input type="text" class="form-control" id="trendQuery" name="SearchQuery" placeholder="Google Trend Query">
+        <button type="submit" class="btn btn-primary mb-3">Search</button>
+    </form>
+</div>

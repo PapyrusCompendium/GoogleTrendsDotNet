@@ -13,7 +13,7 @@ namespace GoogleTrends.Models {
     public class ApiParameter {
         public int TimeZone {
             get {
-                return (int)DateTimeOffset.Now.Offset.TotalMinutes;
+                return (int)Math.Abs(DateTimeOffset.Now.Offset.TotalMinutes);
             }
         }
 

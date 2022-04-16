@@ -2,29 +2,38 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 
-using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace GoogleTrends.Extensions {
     public static class HttpResponseMessageExtensions {
         internal const string JSON_REPLACE_STRING = ")]}'\n";
-        public static TType As<TType>(this HttpResponseMessage httpResponseMessage) {
+        public static TType As<TType>(this HttpResponseMessage httpResponseMessage, string jsonPath = default) {
             if (httpResponseMessage.IsSuccessStatusCode) {
                 using var streamReader = new StreamReader(httpResponseMessage.Content.ReadAsStream());
-
                 var responseContent = streamReader.ReadToEnd().Replace(JSON_REPLACE_STRING, string.Empty);
-                return JsonConvert.DeserializeObject<TType>(responseContent);
+
+                return SelectJPath<TType>(jsonPath, responseContent);
             }
 
             return default;
         }
 
-        public static async Task<TType> AsAsync<TType>(this HttpResponseMessage httpResponseMessage) {
+        public static async Task<TType> AsAsync<TType>(this HttpResponseMessage httpResponseMessage, string jsonPath = default) {
             if (httpResponseMessage.IsSuccessStatusCode) {
-                var responseJson = (await httpResponseMessage.Content.ReadAsStringAsync()).Replace(JSON_REPLACE_STRING, string.Empty);
-                return JsonConvert.DeserializeObject<TType>(responseJson);
+                var responseContent = (await httpResponseMessage.Content.ReadAsStringAsync()).Replace(JSON_REPLACE_STRING, string.Empty);
+
+                return SelectJPath<TType>(jsonPath, responseContent);
             }
 
             return default;
+        }
+
+        private static TType SelectJPath<TType>(string jsonPath, string responseContent) {
+            var jObject = JObject.Parse(responseContent);
+
+            return string.IsNullOrWhiteSpace(jsonPath)
+                ? jObject.ToObject<TType>()
+                : jObject.SelectToken(jsonPath).ToObject<TType>();
         }
     }
 }
