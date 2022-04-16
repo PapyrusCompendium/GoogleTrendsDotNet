@@ -1,14 +1,17 @@
+<center>
+<img src="https://raw.githubusercontent.com/PapyrusCompendium/GoogleTrendsDotNet/master/GoogleTrendsDotNet/images/GoogleTrendsDotNet.png">
+</center>
+
 # GoogleTrendsDotNet
 
 Unofficial Google Trends C# Api.
 
+This is a fully implemented Wrapper of the google trends api located here: <a href="https://trends.google.com/trends/">Google Trends</a>  
+This api makes google trends incredibly easy to consume from C#.
+
 ## Console Application
 
 ```cs
-    public static void Main(string[] args) {
-        QueryData().Wait();
-    }
-
     private static async Task QueryData() {
         var trendsClient = new GoogleTrendsClient();
 
@@ -21,31 +24,6 @@ Unofficial Google Trends C# Api.
             Console.WriteLine($"({query.FormattedValue}) {query.Query}");
         }
         Console.WriteLine();
-
-        var relatedTopics = await exploreData.GetRelatedTopics();
-        Console.WriteLine("Top 5 Related Topics");
-        foreach (var topic in relatedTopics.SelectMany(i => i.RankedKeywords).OrderByDescending(i => i.Value).Take(5)) {
-            Console.WriteLine($"({topic.FormattedValue}) {topic.Topic.Title}");
-        }
-        Console.WriteLine();
-
-        var geoMapData = await exploreData.GetGeoMapData();
-        Console.WriteLine("Top 5 Locations Searched From:");
-        foreach (var location in geoMapData.OrderByDescending(i => i.Value.FirstOrDefault()).Take(5)) {
-            Console.WriteLine($"({location.Value.FirstOrDefault()}) {location.GeoName}");
-        }
-        Console.WriteLine();
-
-        var timeLineData = await exploreData.GetTimeLineData();
-        Console.WriteLine("Top 5 Peak Search Times:");
-        foreach (var searchTime in timeLineData.OrderByDescending(i => i.Value.FirstOrDefault()).Take(5)) {
-            if (!int.TryParse(searchTime.Time, out var unixSeconds)) {
-                continue;
-            }
-
-            var dateTime = DateTime.UnixEpoch.AddSeconds(unixSeconds);
-            Console.WriteLine($"({searchTime.Value.FirstOrDefault()}) {dateTime:yyyy-MMM-dd-HH-mm}");
-        }
     }
 ```
 
