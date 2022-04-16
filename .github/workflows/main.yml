@@ -30,8 +30,13 @@ jobs:
       with:
         dotnet-version: 5.0.x
 
+    - name: Nuget Build Number Generator
+      uses: emrekas/build-number@v3
+      with:
+        token: ${{secrets.github_token}}  
+
     - name: Build
-      run: dotnet build $SOLUTION --configuration $BUILD_CONFIG --no-restore /p:Version=1.0.$(Build.BuildNumber)
+      run: dotnet build $SOLUTION --configuration $BUILD_CONFIG --no-restore /p:Version=$BUILD_NUMBER
 
     - name: Publish
       if: startsWith(github.ref, 'refs/heads/master')
