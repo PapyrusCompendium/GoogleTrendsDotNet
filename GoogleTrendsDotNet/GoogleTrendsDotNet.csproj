@@ -4,9 +4,19 @@
 		<TargetFramework>net5.0</TargetFramework>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageIcon>images\GoogleTrendsDotNet.png</PackageIcon>
+		<RepositoryUrl>https://github.com/PapyrusCompendium/GoogleTrendsDotNet</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/PapyrusCompendium/GoogleTrendsDotNet</PackageProjectUrl>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<Authors>PapyrusCompendium</Authors>
+		<Company />
+		<RepositoryType>Git</RepositoryType>
 	</PropertyGroup>
 
 	<ItemGroup>
+		<None Include="..\LICENSE">
+		  <Pack>True</Pack>
+		  <PackagePath></PackagePath>
+		</None>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<None Include="images\GoogleTrendsDotNet.png" Pack="true" Visible="false" PackagePath="images\GoogleTrendsDotNet.png" />
 	</ItemGroup>
