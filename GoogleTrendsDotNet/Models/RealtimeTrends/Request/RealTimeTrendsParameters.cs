@@ -1,7 +1,9 @@
-﻿namespace GoogleTrends.Models.RealtimeTrends.Request {
+﻿using GoogleTrends.Models.ParameterTypes;
+
+namespace GoogleTrends.Models.RealtimeTrends.Request {
     public class RealTimeTrendsParameters : ApiParameter {
         [UrlParameter("cat")]
-        public string Category { get; set; }
+        public TrendCategory Category { get; set; }
 
         [UrlParameter("fi")]
         public int FI { get; set; }
@@ -9,11 +11,8 @@
         [UrlParameter("fs")]
         public int FS { get; set; }
 
-        /// <summary>
-        /// <see cref="GeoIds"/>
-        /// </summary>
         [UrlParameter("geo")]
-        public string GeographicalLocation { get; set; }
+        public GeoId GeographicalLocation { get; set; }
 
         [UrlParameter("ri")]
         public int RI { get; set; }

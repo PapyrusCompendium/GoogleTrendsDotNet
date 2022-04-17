@@ -1,8 +1,9 @@
 ﻿using System.Threading.Tasks;
 
-using GoogleTrends.Models;
+using GoogleTrends.Extensions;
 using GoogleTrends.Models.Explore;
 using GoogleTrends.Models.Explore.Request;
+using GoogleTrends.Models.ParameterTypes;
 
 namespace GoogleTrends.GoogleTrendsApi {
     public class ExploreApi : ApiService, IExploreApi {
@@ -11,17 +12,17 @@ namespace GoogleTrends.GoogleTrendsApi {
         public ExploreApi(GoogleTrendsClient googleTrendsClient) : base(googleTrendsClient) {
         }
 
-        public async Task<ExploreResponse> ExploreQuery(string query, string searchType = default,
-            string userRegion = default, string queryTime = "now 4-H", string geoSearch = default) {
+        public async Task<ExploreResponse> ExploreQuery(string query, SearchType searchType = default,
+            UserRegion userRegion = default, QueryTimes queryTime = default, GeoId geoSearch = default) {
             return await ExploreQuery(new ExploreQueryParameters {
-                Region = string.IsNullOrWhiteSpace(userRegion) ? Regions.UnitedStates : userRegion,
+                Region = userRegion,
                 Request = new() {
                     Category = 0,
-                    SearchType = string.IsNullOrWhiteSpace(searchType) ? SearchType.WebSearch : searchType,
+                    SearchType = searchType.GetObject<string>(),
                     ComparisonItem = new() {
                         new() {
-                            Geo = geoSearch,
-                            Time = queryTime,
+                            Geo = geoSearch.GetObject<string>(),
+                            Time = queryTime.GetObject<string>(),
                             Keyword = query
                         }
                     }

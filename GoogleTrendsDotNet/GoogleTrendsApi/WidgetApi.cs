@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 
-using GoogleTrends.Models;
 using GoogleTrends.Models.GeoData;
+using GoogleTrends.Models.ParameterTypes;
 using GoogleTrends.Models.Widgets;
 
 namespace GoogleTrends.GoogleTrendsApi {
@@ -37,12 +37,10 @@ namespace GoogleTrends.GoogleTrendsApi {
             return await SendRequest<TimelineData[]>(relatedQueryParameters, TIMELINE_WIDGET, "$.default.timelineData");
         }
 
-        private WidgetRequestParameter GenerateRequestParameter(Widget widget, string region = default) {
+        private WidgetRequestParameter GenerateRequestParameter(Widget widget, UserRegion region = default) {
             return new WidgetRequestParameter {
                 Query = widget.Request,
-                Region = string.IsNullOrWhiteSpace(region)
-                    ? Regions.UnitedStates
-                    : region,
+                Region = region,
                 Token = widget.Token
             };
         }

@@ -2,6 +2,7 @@
 
 using GoogleTrends.Models;
 using GoogleTrends.Models.GeoData;
+using GoogleTrends.Models.ParameterTypes;
 
 namespace GoogleTrends.GoogleTrendsApi {
     public class GeoApi : ApiService, IGeoApi {
@@ -12,7 +13,7 @@ namespace GoogleTrends.GoogleTrendsApi {
 
         public async Task<GeoLocation> GetAllGeoLocations() {
             return await GetAllGeoLocations(new ApiParameter {
-                Region = Regions.UnitedStates
+                Region = UserRegion.UnitedStates
             });
         }
 

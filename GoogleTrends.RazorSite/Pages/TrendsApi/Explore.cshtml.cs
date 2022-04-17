@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 
 using GoogleTrends.Models.Explore;
 using GoogleTrends.Models.GeoData;
+using GoogleTrends.Models.ParameterTypes;
 using GoogleTrends.Models.Widgets;
 
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +27,7 @@ namespace GoogleTrends.RazorSite.Pages.TrendsApi {
 
         public async Task<IActionResult> OnPostAsync() {
             ExploreResponse = await _googleTrendsClient.Explore.ExploreQuery(SearchQuery, SearchType.WebSearch,
-                queryTime: QueryTimes.PastYear, geoSearch: GeoIds.WorldWide);
+                queryTime: QueryTimes.PastYear, geoSearch: GeoId.WorldWide);
 
             RelatedQueries = await ExploreResponse.GetRelatedQueries();
             RelatedTopics = await ExploreResponse.GetRelatedTopics();

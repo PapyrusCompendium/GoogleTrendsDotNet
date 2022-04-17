@@ -1,4 +1,5 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -22,13 +23,21 @@ namespace GoogleTrends.GoogleTrendsApi {
             var apiProperties = apiParameter.GetType().GetProperties();
             foreach (var property in apiProperties.Where(i => i.GetCustomAttributes(true).Any(i => i is UrlParameterAttribute))) {
                 var apiParameterAttribute = property.GetCustomAttributes(true).Single(i => i is UrlParameterAttribute) as UrlParameterAttribute;
-                var propertyValue = property.GetValue(apiParameter)?.ToString();
+                var propertyValue = property.GetValue(apiParameter);
 
-                if (string.IsNullOrWhiteSpace(propertyValue)) {
+                if (propertyValue is null) {
                     continue;
                 }
 
-                parameters[apiParameterAttribute.UrlQueryName] = propertyValue;
+                var propertyString = propertyValue is Enum enuymVaue
+                    ? enuymVaue?.GetObject<string>()
+                    : propertyValue.ToString();
+
+                if (propertyString is null) {
+                    continue;
+                }
+
+                parameters[apiParameterAttribute.UrlQueryName] = propertyString;
             }
 
             return parameters;

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using GoogleTrends.Extensions;
 using GoogleTrends.Models;
 using GoogleTrends.Models.AutoComplete;
+using GoogleTrends.Models.ParameterTypes;
 
 namespace GoogleTrends.GoogleTrendsApi {
     public class AutoCompleteApi : ApiService, IAutoCompleteApi {
@@ -14,7 +15,7 @@ namespace GoogleTrends.GoogleTrendsApi {
 
         public async Task<AutoCompleteSuggestion[]> GetAutoCompleteSuggestions(string searchQuery) {
             return await GetAutoCompleteSuggestions(new ApiParameter() {
-                Region = Regions.UnitedStates
+                Region = UserRegion.UnitedStates
             }, searchQuery);
         }
 
