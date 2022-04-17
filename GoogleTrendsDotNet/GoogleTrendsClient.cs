@@ -24,7 +24,7 @@ namespace GoogleTrends {
             GeoLocation = new GeoApi(this);
             Explore = new ExploreApi(this);
             AutoComplete = new AutoCompleteApi(this);
-            RealtimeTrends = new RealtimeTrends(this);
+            RealtimeTrends = new RealtimeTrendsApi(this);
         }
 
         public IExploreApi Explore { get; set; }
@@ -35,7 +35,7 @@ namespace GoogleTrends {
 
         public IGeoApi GeoLocation { get; set; }
 
-        public IRealtimeTrends RealtimeTrends { get; set; }
+        public IRealtimeTrendsApi RealtimeTrends { get; set; }
 
     }
 }

@@ -10,10 +10,10 @@ namespace GoogleTrends.Models.RealtimeTrends {
         public string Source { get; set; }
 
         [JsonProperty("imgUrl")]
-        public string ImgUrl { get; set; }
+        internal string ImgUrl { get; set; }
 
         [JsonProperty("imageUrl")]
-        public string ImageUrl { get; set; }
+        internal string ImageUrl { get; set; }
 
         public string ImageSourceUrl {
             get {

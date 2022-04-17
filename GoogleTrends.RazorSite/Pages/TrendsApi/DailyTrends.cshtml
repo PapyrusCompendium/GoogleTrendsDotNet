@@ -6,17 +6,37 @@
 }
 
 <div class="text-center">
-    @foreach (var dailyTrend in trendsInOrder)
-    {
-        <div class="w-100 border border-primary text-start row align-items-start mb-3 shadow rounded" style="height: 100px">
-            <div class="h-100 col" style="padding-left: 0">
-                <a href="@dailyTrend.Image.NewsUrl" target="_blank"><img src="@dailyTrend.Image.ImageSourceUrl" class="h-100 w-auto" /></a>
-            </div>
+    <div class="w-100 row">
+        <div class="col">
+            @foreach (var dailyTrend in trendsInOrder)
+            {
+                <div class="w-100 border border-primary text-start row align-items-start mb-3 shadow rounded" style="height: 100px">
+                    <div class="h-100 col" style="padding-left: 0">
+                        <a href="@dailyTrend.Image.NewsUrl" target="_blank"><img src="@dailyTrend.Image.ImageSourceUrl" class="h-100 w-auto" /></a>
+                    </div>
 
-            <div class="h-100 col overflow-hidden">
-                <h1 class="display-6">@dailyTrend.Title.Query</h1>
-                <p class="lead">Articles: @dailyTrend.Articles.Count, Searches: @dailyTrend.FormattedTraffic</p>
-            </div>
+                    <div class="h-100 col overflow-hidden">
+                        <p class="lead">@dailyTrend.Title.Query</p>
+                        <p class="lead">Articles: @dailyTrend.Articles.Count, Searches: @dailyTrend.FormattedTraffic</p>
+                    </div>
+                </div>
+            }
         </div>
-    }
+
+        <div class="col">
+            @foreach (var trendingStory in Model.RealTimeTrends.StorySummaries.TrendingStories)
+            {
+                <div class="w-100 border border-primary text-start row align-items-start mb-3 shadow rounded" style="height: 100px">
+                    <div class="h-100 col" style="padding-left: 0">
+                        <a href="@trendingStory.Image.NewsUrl" target="_blank"><img src="@trendingStory.Image.ImageSourceUrl" class="h-100 w-auto" /></a>
+                    </div>
+
+                    <div class="h-100 col overflow-hidden">
+                        <p class="lead">@trendingStory.Title</p>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
 </div>

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace GoogleTrends.RazorSite.Pages.TrendsApi {
     public class DailyTrendsModel : PageModel {
         public DailyTrends DailyTrends { get; set; }
+        public RealTimeTrends RealTimeTrends { get; set; }
 
         private readonly IGoogleTrendsClient _googleTrendsClient;
 
@@ -16,6 +17,7 @@ namespace GoogleTrends.RazorSite.Pages.TrendsApi {
 
         public async Task OnGetAsync() {
             DailyTrends = await _googleTrendsClient.RealtimeTrends.GetDailyTrends();
+            RealTimeTrends = await _googleTrendsClient.RealtimeTrends.GetRealtimeTrends();
         }
     }
 }
