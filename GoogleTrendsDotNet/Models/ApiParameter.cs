@@ -11,14 +11,20 @@ namespace GoogleTrends.Models {
     }
 
     public class ApiParameter {
+        [UrlParameter("tz")]
         public int TimeZone {
             get {
                 return (int)Math.Abs(DateTimeOffset.Now.Offset.TotalMinutes);
             }
         }
 
+        /// <summary>
+        /// <see cref="Regions"/>
+        /// </summary>
+        [UrlParameter("hl")]
         public string Region { get; set; }
 
+        [UrlParameter("token")]
         public string Token { get; set; }
     }
 }

@@ -18,8 +18,7 @@ namespace GoogleTrends.GoogleTrendsApi {
         }
 
         public async Task<RankedList[]> GetRelatedQueriesWidget(WidgetRequestParameter relatedQueryParameters) {
-            return await SendRequest<RankedList[]>(relatedQueryParameters, RELATED_SEARCHES_WIDGET,
-                relatedQueryParameters.Query.ToString(), "$.default.rankedList");
+            return await SendRequest<RankedList[]>(relatedQueryParameters, RELATED_SEARCHES_WIDGET, "$.default.rankedList");
         }
 
         public async Task<GeoMapData[]> GetGeoDataWidget(Widget widget) {
@@ -27,8 +26,7 @@ namespace GoogleTrends.GoogleTrendsApi {
         }
 
         public async Task<GeoMapData[]> GetGeoDataWidget(WidgetRequestParameter relatedQueryParameters) {
-            return await SendRequest<GeoMapData[]>(relatedQueryParameters, GEO_DATA_WIDGET,
-                relatedQueryParameters.Query.ToString(), "$.default.geoMapData");
+            return await SendRequest<GeoMapData[]>(relatedQueryParameters, GEO_DATA_WIDGET, "$.default.geoMapData");
         }
 
         public async Task<TimelineData[]> GetTimelineWidget(Widget widget) {
@@ -36,8 +34,7 @@ namespace GoogleTrends.GoogleTrendsApi {
         }
 
         public async Task<TimelineData[]> GetTimelineWidget(WidgetRequestParameter relatedQueryParameters) {
-            return await SendRequest<TimelineData[]>(relatedQueryParameters, TIMELINE_WIDGET,
-                relatedQueryParameters.Query.ToString(), "$.default.timelineData");
+            return await SendRequest<TimelineData[]>(relatedQueryParameters, TIMELINE_WIDGET, "$.default.timelineData");
         }
 
         private WidgetRequestParameter GenerateRequestParameter(Widget widget, string region = default) {

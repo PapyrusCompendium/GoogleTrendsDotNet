@@ -1,4 +1,5 @@
 ﻿using System.Collections.Specialized;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
@@ -15,22 +16,26 @@ namespace GoogleTrends.GoogleTrendsApi {
             _googleTrendsClient = googleTrendsClient;
         }
 
-        protected static NameValueCollection AddDefaultParameters(ApiParameter apiParameter) {
+        protected static NameValueCollection AddParameters<TType>(TType apiParameter) where TType : ApiParameter {
             var parameters = HttpUtility.ParseQueryString(string.Empty);
-            parameters["hl"] = apiParameter.Region;
-            parameters["tz"] = apiParameter.TimeZone.ToString();
-            if (!string.IsNullOrWhiteSpace(apiParameter.Token)) {
-                parameters["token"] = apiParameter.Token;
+
+            var apiProperties = apiParameter.GetType().GetProperties();
+            foreach (var property in apiProperties.Where(i => i.GetCustomAttributes(true).Any(i => i is UrlParameterAttribute))) {
+                var apiParameterAttribute = property.GetCustomAttributes(true).Single(i => i is UrlParameterAttribute) as UrlParameterAttribute;
+                var propertyValue = property.GetValue(apiParameter)?.ToString();
+
+                if (string.IsNullOrWhiteSpace(propertyValue)) {
+                    continue;
+                }
+
+                parameters[apiParameterAttribute.UrlQueryName] = propertyValue;
             }
 
             return parameters;
         }
 
-        protected async Task<TType> SendRequest<TType>(ApiParameter relatedQueryParameters, string apiUri, string jsonRequest = default, string jsonPath = default) {
-            var parameters = AddDefaultParameters(relatedQueryParameters);
-            if (!string.IsNullOrWhiteSpace(jsonRequest)) {
-                parameters["req"] = jsonRequest;
-            }
+        protected async Task<TType> SendRequest<TType>(ApiParameter relatedQueryParameters, string apiUri, string jsonPath = default) {
+            var parameters = AddParameters(relatedQueryParameters);
 
             var uriString = $"{apiUri}?{parameters}";
             var relatedQueryRequest = new HttpRequestMessage(HttpMethod.Get, uriString);

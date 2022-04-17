@@ -1,0 +1,22 @@
+﻿@page
+@model GoogleTrends.RazorSite.Pages.TrendsApi.DailyTrendsModel
+@{
+    ViewData["Title"] = "Daily Trends";
+    var trendsInOrder = Model.DailyTrends.TrendingSearchesDays.SelectMany(i => i.TrendingSearches).OrderByDescending(i => i.Articles.Count);
+}
+
+<div class="text-center">
+    @foreach (var dailyTrend in trendsInOrder)
+    {
+        <div class="w-100 border border-primary text-start row align-items-start mb-3 shadow rounded" style="height: 100px">
+            <div class="h-100 col" style="padding-left: 0">
+                <a href="@dailyTrend.Image.NewsUrl" target="_blank"><img src="@dailyTrend.Image.ImageSourceUrl" class="h-100 w-auto" /></a>
+            </div>
+
+            <div class="h-100 col overflow-hidden">
+                <h1 class="display-6">@dailyTrend.Title.Query</h1>
+                <p class="lead">Articles: @dailyTrend.Articles.Count, Searches: @dailyTrend.FormattedTraffic</p>
+            </div>
+        </div>
+    }
+</div>

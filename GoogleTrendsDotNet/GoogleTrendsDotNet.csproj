@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
@@ -12,6 +12,7 @@
 		<RepositoryType>Git</RepositoryType>
 		<Description>Unofficial Google Trends C# Api.</Description>
 		<Copyright>MIT</Copyright>
+		<RootNamespace>GoogleTrends</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>

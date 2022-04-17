@@ -21,5 +21,6 @@ namespace GoogleTrends {
         /// Google Trend recommended topics for auto-complete/partial queries.
         /// </summary>
         IAutoCompleteApi AutoComplete { get; set; }
+        IRealtimeTrends RealtimeTrends { get; set; }
     }
 }

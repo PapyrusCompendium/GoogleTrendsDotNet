@@ -1,7 +1,5 @@
-﻿using System.Net.Http;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
-using GoogleTrends.Extensions;
 using GoogleTrends.Models;
 using GoogleTrends.Models.Explore;
 using GoogleTrends.Models.Explore.Request;
@@ -32,13 +30,7 @@ namespace GoogleTrends.GoogleTrendsApi {
         }
 
         public async Task<ExploreResponse> ExploreQuery(ExploreQueryParameters exploreQueryParameters) {
-            var parameters = AddDefaultParameters(exploreQueryParameters);
-            parameters["req"] = exploreQueryParameters.Request.ToString();
-            var uriString = $"{EXPLORE}?{parameters}";
-            var relatedQueryRequest = new HttpRequestMessage(HttpMethod.Get, uriString);
-
-            var response = await _googleTrendsClient._httpClient.SendAsync(relatedQueryRequest);
-            var exploreResponse = response.As<ExploreResponse>();
+            var exploreResponse = await SendRequest<ExploreResponse>(exploreQueryParameters, EXPLORE);
             exploreResponse.GoogleTrendsClient = _googleTrendsClient;
             return exploreResponse;
         }
