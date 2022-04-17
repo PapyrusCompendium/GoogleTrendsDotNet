@@ -21,6 +21,7 @@
 		  <PackagePath></PackagePath>
 		</None>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="SystemUnderTestUnitTesting" Version="1.0.0" />
 		<None Include="images\GoogleTrendsDotNet.png" Pack="true" Visible="false" PackagePath="images\GoogleTrendsDotNet.png" />
 	</ItemGroup>
 

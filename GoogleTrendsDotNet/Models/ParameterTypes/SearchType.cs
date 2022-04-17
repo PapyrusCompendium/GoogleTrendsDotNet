@@ -1,5 +1,8 @@
 ﻿namespace GoogleTrends.Models.ParameterTypes {
     public enum SearchType {
+        [EnumObject("")]
+        WebSearch,
+
         [EnumObject("youtube")]
         Youtube,
 
@@ -10,12 +13,6 @@
         News,
 
         [EnumObject("froogle")]
-        Shopping,
-
-        [EnumObject("")]
-        WebSearch,
-
-        [EnumObject("")]
-        _
+        Shopping
     }
 }

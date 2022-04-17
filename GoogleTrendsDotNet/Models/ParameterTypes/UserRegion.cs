@@ -1,10 +1,10 @@
 ﻿namespace GoogleTrends.Models.ParameterTypes {
     public enum UserRegion {
-        [EnumObject("ar")]
-        Arabic,
-
         [EnumObject("en-US")]
         UnitedStates,
+
+        [EnumObject("ar")]
+        Arabic,
 
         [EnumObject("en-GB")]
         UnitedKingdom,
@@ -16,9 +16,6 @@
         Chinese,
 
         [EnumObject("zh-TW")]
-        Taiwan,
-
-        [EnumObject("en-US")]
-        _
+        Taiwan
     }
 }

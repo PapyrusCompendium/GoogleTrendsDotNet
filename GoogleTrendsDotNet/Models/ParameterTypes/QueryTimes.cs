@@ -1,13 +1,13 @@
 ﻿namespace GoogleTrends.Models.ParameterTypes {
     public enum QueryTimes {
+        [EnumObject("now 1-d")]
+        PastDay,
+
         [EnumObject("now 1-H")]
         PastHour,
 
         [EnumObject("now 4-H")]
         PastFourHours,
-
-        [EnumObject("now 1-d")]
-        PastDay,
 
         [EnumObject("today 7-d")]
         PastWeek,
@@ -25,9 +25,6 @@
         PastFiveYears,
 
         [EnumObject("all_2008")]
-        AllTime,
-
-        [EnumObject("now 1-d")]
-        _
+        AllTime
     }
 }
